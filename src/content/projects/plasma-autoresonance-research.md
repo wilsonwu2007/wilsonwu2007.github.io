@@ -1,6 +1,6 @@
 ---
-title: "Computational Autoresonance Research"
-summary: "Built numerical models and ran particle-in-cell simulations to study autoresonant control of plasma beat-wave acceleration, as part of UCLA's Laser-Plasma Group."
+title: "Computational Plasma Acceleration and Autoresonance Research"
+summary: "Built numerical models and designed particle-in-cell simulations to study electromagnetic-wave propagation and autoresonant control in plasma beat-wave acceleration with UCLA's Laser-Plasma Group."
 date: 2025-08-01
 org: "UCLA Plasma Accelerator / Laser-Plasma Interactions Group"
 tags: ["Computational Physics", "Python", "OSIRIS", "Particle-in-Cell Simulation"]
@@ -13,13 +13,15 @@ image: "/images/projects/plasma-autoresonance-research/pendulum-graph.png"
 
 Particle accelerators are used in medical treatments, X-ray generation, and physics research, but traditional designs span kilometers. Plasma-based accelerators could shrink that to meters. My research focused on a key challenge: keeping the laser frequency matched to the plasma wave as it grows, a problem called **autoresonance**.
 
+To build toward that goal, I combined reduced numerical models of nonlinear wave growth with OSIRIS particle-in-cell simulations of electromagnetic waves in plasma. This let me study plasma dispersion and cutoff behavior while developing the simulation and analysis workflow needed for larger plasma-acceleration studies.
+
 ## What I Did
 
 - Built **numerical models** of a driven pendulum oscillator to simulate autoresonant wave amplitude growth under different drive constants, validating behavior against theoretical predictions.
-- Configured and ran **OSIRIS particle-in-cell simulations**, simulating electromagnetic waves propagating into plasma.
-- Wrote a **Python data pipeline** using SciPy, NumPy, and matplotlib to process simulation outputs and visualize laser field envelopes and plasma wave dynamics.
+- Designed and ran **OSIRIS particle-in-cell simulations** above and below the plasma-frequency cutoff, iterating wave, plasma, grid, and particle parameters.
+- Wrote a **Python/HDF5 analysis pipeline** using FFT spectral analysis and Hilbert-transform envelope detection to extract wavenumber and wave-packet dynamics from simulation outputs.
 
-**Tools:** OSIRIS (UCLA-developed particle-in-cell simulation framework), Python (SciPy, NumPy, matplotlib)
+**Tools:** OSIRIS (UCLA-developed particle-in-cell simulation framework), Python (SciPy, NumPy, matplotlib, h5py)
 
 ## Results
 
@@ -41,9 +43,10 @@ Particle accelerators are used in medical treatments, X-ray generation, and phys
 
 **OSIRIS particle-in-cell simulation and spectral analysis**
 
-- **Designed and iterated** the simulation parameters for a one-dimensional OSIRIS model, including the domain, plasma region, grid resolution, and particle count, to balance numerical accuracy and signal quality.
-- **Tracked** the transverse electric field `E_z` alongside plasma density over normalized space and time to visualize a localized electromagnetic pulse propagating through and beyond the plasma.
-- **Applied FFT spectral analysis** to the simulated electric-field data to identify the dominant spatial-frequency peak, extract the wavenumber, and compare the measured result with the theoretical prediction.
+- **Designed and iterated** one-dimensional OSIRIS scenarios above and below the plasma-frequency cutoff, selecting the wave frequency, plasma geometry, grid resolution, and particles per cell to balance numerical accuracy and signal quality.
+- **Reconstructed** electric-field and plasma-density histories from HDF5 outputs to visualize pulse propagation, partial reflection and transmission above cutoff, and reflection below cutoff.
+- **Applied a Hann-windowed FFT** to spatial electric-field data to isolate the dominant spectral peak, extract wavenumbers in vacuum and plasma, and compare them with the electromagnetic dispersion relation.
+- **Developed additional diagnostics** using Hilbert-transform envelope tracking, linear fitting, and field-amplitude measurements to analyze group velocity, penetration depth, and electric-to-magnetic-field relationships.
 
 ![OSIRIS particle-in-cell simulation of an electromagnetic pulse propagating through a finite plasma region](/images/projects/plasma-autoresonance-research/em-wave.gif)
 
