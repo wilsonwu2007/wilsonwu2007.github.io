@@ -39,9 +39,16 @@ Particle accelerators are used in medical treatments, X-ray generation, and phys
 
 ![Plasma beat wave acceleration under three chirp modes](/images/projects/plasma-autoresonance-research/chirp-graph.png)
 
+**Electromagnetic-wave propagation in OSIRIS**
+
+- **Configured** a one-dimensional particle-in-cell simulation with a finite plasma region and launched a localized electromagnetic pulse through the domain.
+- **Tracked** the transverse electric field `E_z` alongside plasma density over normalized space and time to visualize the pulse propagating through and beyond the plasma.
+- **Tuned** grid resolution and particle count across test scenarios to balance numerical accuracy and signal quality.
+
+![OSIRIS particle-in-cell simulation of an electromagnetic pulse propagating through a finite plasma region](/images/projects/plasma-autoresonance-research/em-wave.gif)
+
 ## What I Learned
 
 This was my first exposure to a research-grade simulation workflow. I learned how numerical models and large-scale simulations cross-validate each other, and how to extract meaningful signal from noisy raw data.
 
 ![Research poster: Auto-Resonance in 1D Plasma Beat-Wave Acceleration](/images/projects/plasma-autoresonance-research/poster.jpg)
-
