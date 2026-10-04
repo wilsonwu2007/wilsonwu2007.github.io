@@ -1,15 +1,17 @@
 ---
 title: "Computational Plasma Acceleration and Autoresonance Research"
-summary: "Built numerical models and designed particle-in-cell simulations to study electromagnetic-wave propagation and autoresonant control in plasma beat-wave acceleration with UCLA's Laser-Plasma Group."
-date: 2025-08-01
+summary: "Reproduced published plasma-wave growth using numerical models, configured OSIRIS simulations, and optimized Python/HDF5 analysis to reduce processing time by 75% (2 min to 30 s)."
+date: 2026-06-01
 org: "UCLA Plasma Accelerator / Laser-Plasma Interactions Group"
-tags: ["Computational Physics", "Python", "OSIRIS", "Particle-in-Cell Simulation"]
+tags: ["Computational Physics", "Python", "OSIRIS", "HDF5", "Particle-in-Cell Simulation"]
 featured: true
 order: 2
 image: "/images/projects/plasma-autoresonance-research/pendulum-graph.png"
 ---
 
 ## Background
+
+**Role:** Undergraduate Researcher · June 2026–Present
 
 Particle accelerators are used in medical treatments, X-ray generation, and physics research, but traditional designs span kilometers. Plasma-based accelerators could shrink that to meters. My research focused on a key challenge: keeping the laser frequency matched to the plasma wave as it grows, a problem called **autoresonance**.
 
@@ -18,12 +20,19 @@ To build toward that goal, I combined reduced numerical models of nonlinear wave
 ## What I Did
 
 - Built **numerical models** of a driven pendulum oscillator to simulate autoresonant wave amplitude growth under different drive constants, validating behavior against theoretical predictions.
+- Implemented numerical models of autoresonant beat-wave excitation to reproduce published nonlinear plasma-wave amplitude-growth results.
 - Designed and ran **OSIRIS particle-in-cell simulations** above and below the plasma-frequency cutoff, iterating wave, plasma, grid, and particle parameters.
 - Wrote a **Python/HDF5 analysis pipeline** using FFT spectral analysis and Hilbert-transform envelope detection to extract wavenumber and wave-packet dynamics from simulation outputs.
 
 **Tools:** OSIRIS (UCLA-developed particle-in-cell simulation framework), Python (SciPy, NumPy, matplotlib, h5py)
 
 ## Results
+
+**Simulation validation and analysis performance**
+
+- Reproduced **plasma-wave amplitudes with 80% accuracy relative to numerical-model predictions** in OSIRIS particle-in-cell simulations, tuning grid resolution and particle count.
+- Optimized extraction and analysis of **337 MB of HDF5 simulation output**, reducing processing time from **2 min to 30 s — a 75% reduction**.
+- Used **FFT and Hilbert-transform analysis** to extract spectra and amplitude envelopes alongside the wave-propagation diagnostics below.
 
 **Auto-resonant control of a nonlinear pendulum**
 
@@ -33,7 +42,7 @@ To build toward that goal, I combined reduced numerical models of nonlinear wave
 
 ![Pendulum oscillator autoresonance simulation across drive constants](/images/projects/plasma-autoresonance-research/pendulum-graph.png)
 
-**Auto-resonant control of PWBA using laser chirping**
+**Auto-resonant control of PBWA using laser chirping**
 
 - **Modeled** plasma beat-wave dynamics with different chirp rates.
 - **Compared** chirped and unchirped wave growth.

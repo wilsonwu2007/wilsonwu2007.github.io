@@ -1,9 +1,9 @@
 ---
 title: "Bruin Supermileage: Hydrogen Fuel Cell Safety Board"
-summary: "Designed and validated an electrical safety board implementing a fail-safe hardware interlock for hydrogen leak detection, ignition control, and driver emergency shutdown on a hydrogen fuel-cell vehicle."
-date: 2025-05-01
+summary: "Designed a two-layer safety PCB integrating two hydrogen sensors, ignition and emergency-stop interlocks, and CAN communication; verified four fault conditions and estimated a 1 s faster shutdown than the previous year's board."
+date: 2025-10-01
 org: "UCLA Bruin Racing, Bruin Supermileage"
-tags: ["PCB Design", "KiCad", "Embedded Systems", "Safety Systems", "STM32"]
+tags: ["PCB Design", "KiCad", "LTspice", "CAN", "Embedded Systems", "STM32"]
 featured: true
 order: 1
 image: "/images/projects/bruin-supermileage-safety-board/pcb-render.png"
@@ -13,7 +13,9 @@ image: "/images/projects/bruin-supermileage-safety-board/pcb-render.png"
 
 ## Project Overview
 
-My teammate and I designed and validated an electrical safety board implementing a fail-safe hardware interlock for hydrogen leak detection, ignition control, and driver emergency shutdown on a hydrogen fuel-cell vehicle.
+**Role:** Low Voltage Engineer · October 2025–June 2026
+
+My teammate and I designed and tested a two-layer safety PCB for UCLA's Shell Eco-marathon hydrogen fuel-cell vehicle. The board integrates two hydrogen sensors, an ignition interlock, emergency-stop inputs, and CAN communication. Its hardware interlock combines these safety signals to interrupt vehicle power when a fault is detected.
 
 **My contribution:** high-level block diagram, safety architecture, schematic design, PCB design, and testing.
 
@@ -22,10 +24,11 @@ My teammate and I designed and validated an electrical safety board implementing
 - PCB: 2-layer, designed in KiCad
 - Input: 12 V
 - MCU: STM32
-- Sensors: dual H₂ sensors
+- Sensors: two H₂ sensors
 - Power rails: 5 V / 3.3 V
 - Safety logic: hardware interlock + relay shutdown
 - Feedback: optocoupler isolation
+- Communication: CAN
 
 ## Design Decisions
 
@@ -45,7 +48,7 @@ The biggest lesson I took away was to **finalize the architecture before startin
 **Dual H₂ Sensors**
 
 - Initially selected the **TGS6812-D00 hydrogen sensor**, but its millivolt-range output required an **instrumentation amplifier** to produce a usable signal.
-- Tested a second hydrogen sensor available in the workspace and confirmed its output was suitable for hydrogen detection, so we used it instead of relying on an untested sensor.
+- Tested a second hydrogen sensor available in the workspace and confirmed its output was suitable for hydrogen detection, integrating it as a backup sensor.
 
 ![Dual H2 sensor schematic](/images/projects/bruin-supermileage-safety-board/schematic-h2-sensors.png)
 
@@ -90,7 +93,8 @@ Fitting passive components around the large relay footprints was harder than exp
 **What We Tested**
 
 - Added **test points** throughout the board to isolate potential failure points during testing.
-- Tested relay switching across three conditions: **H₂ leak, E-stop activation, and ignition control**. The response was fast enough to safely shut down the system.
+- Verified **CAN communication and relay response across four fault conditions** through bench and in-vehicle testing, including hydrogen-sensor faults, E-stop activation, and ignition control.
+- Estimated an **approximately 1 s reduction in shutdown response time** compared with the previous year's board using video timing.
 - Integrated the safety board with the vehicle and verified that the safety functions operated as intended.
 
 ![Board under bench testing with H2 tank](/images/projects/bruin-supermileage-safety-board/testing-photo.jpg)
