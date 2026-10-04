@@ -1,7 +1,7 @@
 ---
 title: "Micromouse: Autonomous Maze-Solving Robot"
-summary: "Designed and built an autonomous robot capable of navigating a 16×16 maze, with integrated sensing, motor control, and orientation tracking on a custom PCB."
-date: 2025-03-01
+summary: "Led a five-person team developing a maze-solving robot, designed a two-layer PCB with four IR sensor pairs, and restored board functionality through hardware and STM32 firmware fixes."
+date: 2025-12-01
 org: "IEEE Micromouse"
 tags: ["PCB Design", "KiCad", "Embedded Systems", "Robotics", "STM32"]
 featured: true
@@ -13,9 +13,11 @@ image: "/images/projects/micromouse/pcb-render.png"
 
 ## Project Overview
 
-My team and I designed and built an autonomous robot capable of navigating a 16×16 maze, with integrated sensing, motor control, and orientation tracking on a custom PCB.
+**Role:** Team Lead · December 2025–Present
 
-**My contribution:** PCB architecture and schematic design, component selection, PCB layout, and hardware debugging.
+Led a **five-person team** developing an autonomous robot for a 16×16 maze, coordinating hardware and firmware work across power, sensing, and motor-control subsystems. The robot integrates four infrared emitter-detector pairs, motor control, and orientation tracking on a custom two-layer PCB.
+
+**My contribution:** team coordination, PCB architecture and schematic design, component selection, PCB layout, hardware and STM32 firmware debugging, and flood-fill logic in C.
 
 ## Technical Specifications
 
@@ -49,13 +51,14 @@ My team and I designed and built an autonomous robot capable of navigating a 16�
 - Kept the PCB **compact** to reduce weight and maintain balanced weight distribution.
 - Placed **IR emitters and receivers** along the board edges for clear wall detection.
 - Placed **decoupling capacitors** close to IC power pins to reduce power-supply noise.
+- Separated sensor traces from high-current motor-driver routing to limit interference.
 - Optimized component placement to **minimize vias** and keep routing short and simple.
 
 ![PCB layout render](/images/projects/micromouse/pcb-layout.png)
 
 ## Physical Testing & Firmware Issues
 
-A handful of pin and peripheral conflicts surfaced during firmware integration.
+Restored functionality to the fabricated PCB by tracing layout and STM32 firmware errors, then applying **jumper-wire repairs and code fixes**. A handful of pin and peripheral conflicts surfaced during firmware integration.
 
 - **TIM3 conflict:** motors needed PWM while encoders needed timer inputs, but both were assigned to TIM3. Remapped motors to TIM13 and TIM14 to separate the timer functions.
 - **PA9 conflict:** PA9 was assigned to both USART1 TX and a right encoder channel. Removed USART1 since encoder feedback was more important for motor control.
@@ -63,6 +66,8 @@ A handful of pin and peripheral conflicts surfaced during firmware integration.
 
 ![Assembled Micromouse board](/images/projects/micromouse/physical-photo.jpg)
 
-The robot can move, but **flood fill, movement primitives, and the main state machine** remain incomplete. IR thresholds and PID gains have not yet been calibrated on hardware.
+## Maze-Mapping Firmware & Current Status
+
+Developed **flood-fill logic in STM32 C** to map visited maze cells and update path costs. The robot can move, while full maze-solving operation has not yet been validated. Movement primitives, state-machine integration, IR thresholds, and hardware PID calibration remain in progress.
 
 Looking back, I would create a peripheral and pin map before PCB layout, prioritizing required timers and ADC channels to avoid the conflicts discovered during firmware integration.
